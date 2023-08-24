@@ -7,16 +7,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return MaterialApp(
-      title:"Login ui",
+      title: "Login ui",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.amberAccent,
       ),
-      home:LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }

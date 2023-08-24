@@ -1,1 +1,1 @@
-var token ;
+var token;
