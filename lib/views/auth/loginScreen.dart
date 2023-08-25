@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../../utilities/Helpers.dart';
 import '../../controllers/api.dart';
 import '../../vars/globals.dart';
 import '../page/home.dart';
-import 'package:http/http.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
