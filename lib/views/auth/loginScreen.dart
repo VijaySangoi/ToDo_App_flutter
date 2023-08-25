@@ -32,15 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Helpers.input('Username', username, false),
             Helpers.input('Password', password, true),
             TextButton(
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(150, 40)),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
               onPressed: () {
                 var interface = api();
                 interface.postrequest(
-                    Uri.parse("http://"+server+"/api/login"), {
+                    Uri.parse("http://" + server + "/api/login"), {
                   "username": username.text,
                   "password": password.text
                 }).then((data) {
@@ -54,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: const Text('Login'),
             ),
+            TextButton(onPressed: () {}, child: const Text('Register'))
           ],
         ));
   }
