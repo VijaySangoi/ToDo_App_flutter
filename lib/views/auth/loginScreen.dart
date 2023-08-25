@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 var interface = api();
                 interface.postrequest(
-                    Uri.parse("http://192.168.10.12:8000/api/login"), {
+                    Uri.parse("http://"+server+"/api/login"), {
                   "username": username.text,
                   "password": password.text
                 }).then((data) {
