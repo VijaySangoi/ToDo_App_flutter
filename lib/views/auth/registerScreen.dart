@@ -3,42 +3,50 @@ import '../../utilities/Helpers.dart';
 import '../../controllers/api.dart';
 import '../../vars/globals.dart';
 import '../page/homeScreen.dart';
-import 'registerScreen.dart';
+import 'loginScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final username = TextEditingController();
+    final email = TextEditingController();
     final password = TextEditingController();
+    final confirm_password = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Nothing-todo'),
       ),
-      body: body(username, password),
+      body: body(username, password, email, confirm_password),
     );
   }
 
-  Widget body(username, password) {
+  Widget body(username, password, email, confirm_password) {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 130),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 80),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Helpers.input('Username', username, false),
+            Helpers.input('email', email, false),
             Helpers.input('Password', password, true),
+            Helpers.input('Confirm Password', confirm_password, true),
             TextButton(
               onPressed: () {
                 var interface = api();
                 interface.postrequest(
-                    Uri.parse("http://" + server + "/api/login"), {
+                    Uri.parse("http://" + server + "/api/register"), {
                   "username": username.text,
-                  "password": password.text
+                  "email": email.text,
+                  "password": password.text,
+                  "confirm_password": confirm_password.text
                 }).then((data) {
                   if (data.statusCode == 200) {
                     token = data.body;
@@ -48,13 +56,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 });
               },
-              child: const Text('Login'),
+              child: const Text('Register'),
             ),
             TextButton(
                 onPressed: () {
-                  Helpers.route(context, const RegisterScreen());
+                  Navigator.of(context).pop();
                 },
-                child: const Text('Register'))
+                child: const Text('Login'))
           ],
         )
     );
