@@ -33,7 +33,7 @@ class Helpers {
             TextButton(
               child: const Text('ok'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
             ),
           ],
@@ -46,6 +46,26 @@ class Helpers {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  static sidebar(context, options) {
+    print(options);
+    return Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              child:CircleAvatar(
+                backgroundImage: AssetImage('assets/profile.png'),
+                radius: 120,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.indigo,
+              ),
+            ),
+          ],
+        )
     );
   }
 }
