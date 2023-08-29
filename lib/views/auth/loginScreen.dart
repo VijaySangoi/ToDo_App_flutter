@@ -37,12 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 var interface = api();
                 interface.postrequest(
                   Uri.parse("http://" + server + "/api/login"),
-                  {},
+                  {"content-type":"application/json"},
                   {
                     "username": username.text,
                     "password": password.text
                   }).then((data) {
                   if (data.statusCode == 200) {
+                    print('reached here');
                     token = data.body;
                     Helpers.route(context, const HomeScreen());
                   } else {

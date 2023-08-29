@@ -43,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 var interface = api();
                 interface.postrequest(
                 Uri.parse("http://" + server + "/api/register"),
-                {},
+                {"content-type":"application/json"},
                 {
                   "username": username.text,
                   "email": email.text,
