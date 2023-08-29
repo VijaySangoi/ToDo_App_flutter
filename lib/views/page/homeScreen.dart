@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nothing_todo/vars/globals.dart';
 import '../../utilities/Helpers.dart';
+import '../../controllers/api.dart';
 import 'getTask.dart';
 import 'postTask.dart';
 import 'putTask.dart';
@@ -14,16 +16,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   @override
-  var options = [
-  ];
   Widget build(BuildContext context) {
+    var interface = api();
+    interface.getrequest(
+        Uri.parse("http://" + server + "/api/task"),
+        {"Authorization":"Bearer "+token},
+        {}
+    ).then((data){
+      print(data.body);
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Nothing-todo'),
       ),
-      drawer: Helpers.sidebar(context,options),
-      body: Center(),
+      drawer: Helpers.sidebar(context),
+      body: Center()
     );
   }
 }
