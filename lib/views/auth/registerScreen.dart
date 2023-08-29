@@ -42,7 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onPressed: () {
                 var interface = api();
                 interface.postrequest(
-                    Uri.parse("http://" + server + "/api/register"), {
+                Uri.parse("http://" + server + "/api/register"),
+                {},
+                {
                   "username": username.text,
                   "email": email.text,
                   "password": password.text,
