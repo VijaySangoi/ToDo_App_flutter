@@ -49,8 +49,7 @@ class Helpers {
     );
   }
 
-  static sidebar(context, options) {
-    print(options);
+  static sidebar(context) {
     return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
