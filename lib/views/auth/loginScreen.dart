@@ -19,8 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
     const head = {"content-type": "application/json"};
     var bod = {"username": username, "password": password};
     String response = await interface.postrequest(url, head, bod);
-    print(response);
-    if (response != "failed") {
+    if (response != "false") {
       token = response;
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));

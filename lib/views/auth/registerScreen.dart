@@ -26,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       "confirm_password": confirm_password
     };
     String response = await interface.postrequest(url, head, bod);
-    if (response != "failed") {
+    if (response != "false") {
       token = response;
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
