@@ -13,6 +13,26 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  var interface = api();
+  bool _login_var = false;
+
+  register(username, email, password, confirm_password) async {
+    var url = "http://" + server + "/api/register";
+    const head = {"content-type": "application/json"};
+    var bod = {
+      "username": username,
+      "password": password,
+      "email": email,
+      "confirm_password": confirm_password
+    };
+    String response = await interface.postrequest(url, head, bod);
+    if (response != "failed") {
+      token = response;
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final username = TextEditingController();
@@ -40,23 +60,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Helpers.input('Confirm Password', confirm_password, true),
             TextButton(
               onPressed: () {
-                var interface = api();
-                interface.postrequest(
-                Uri.parse("http://" + server + "/api/register"),
-                {"content-type":"application/json"},
-                {
-                  "username": username.text,
-                  "email": email.text,
-                  "password": password.text,
-                  "confirm_password": confirm_password.text
-                }).then((data) {
-                  if (data.statusCode == 200) {
-                    token = data.body;
-                    Helpers.route(context, const HomeScreen());
-                  } else {
-                    Helpers.alert(context, data.body, 'Error');
-                  }
-                });
+                _login_var = true;
+                register(username.text, password.text, email.text,
+                    confirm_password.text);
               },
               child: const Text('Register'),
             ),
@@ -66,7 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 child: const Text('Login'))
           ],
-        )
-    );
+        ));
   }
 }

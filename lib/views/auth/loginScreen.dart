@@ -11,6 +11,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var interface = api();
+  bool _login_var = false;
+
+  login(username, password) async {
+    var url = "http://" + server + "/api/login";
+    const head = {"content-type": "application/json"};
+    var bod = {"username": username, "password": password};
+    String response = await interface.postrequest(url, head, bod);
+    print(response);
+    if (response != "failed") {
+      token = response;
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final username = TextEditingController();
@@ -34,21 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
             Helpers.input('Password', password, true),
             TextButton(
               onPressed: () {
-                var interface = api();
-                interface.postrequest(
-                  Uri.parse("http://" + server + "/api/login"),
-                  {"content-type":"application/json"},
-                  {
-                    "username": username.text,
-                    "password": password.text
-                  }).then((data) {
-                  if (data.statusCode == 200) {
-                    print('reached here');
-                    token = data.body;
-                    Helpers.route(context, const HomeScreen());
-                  } else {
-                    Helpers.alert(context, data.body, 'Error');
-                  }
+                setState(() {
+                  _login_var = true;
+                  login(username.text, password.text);
                 });
               },
               child: const Text('Login'),
@@ -59,7 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text('Register'))
           ],
-        )
-    );
+        ));
   }
 }
