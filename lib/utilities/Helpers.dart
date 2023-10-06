@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../views/page/completedScreen.dart';
+import '../views/page/homeScreen.dart';
 
 class Helpers {
   static input(text, con, obscure) {
@@ -63,6 +65,22 @@ class Helpers {
                 color: Colors.indigo,
               ),
             ),
+            ListTile(
+              title: const Text('Home'),
+              onTap: (){
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const HomeScreen())
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Completed'),
+              onTap: (){
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const CompletedScreen())
+                );
+              },
+            )
           ],
         )
     );
