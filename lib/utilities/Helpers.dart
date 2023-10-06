@@ -54,35 +54,34 @@ class Helpers {
   static sidebar(context) {
     return Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              child:CircleAvatar(
-                backgroundImage: AssetImage('assets/profile.png'),
-                radius: 120,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.indigo,
-              ),
-            ),
-            ListTile(
-              title: const Text('Home'),
-              onTap: (){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const HomeScreen())
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Completed'),
-              onTap: (){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const CompletedScreen())
-                );
-              },
-            )
-          ],
+      padding: EdgeInsets.zero,
+      children: [
+        const DrawerHeader(
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/profile.png'),
+            radius: 120,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.indigo,
+          ),
+        ),
+        ListTile(
+          title: const Text('Home'),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
+          },
+        ),
+        ListTile(
+          title: const Text('Completed'),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CompletedScreen()));
+          },
         )
-    );
+      ],
+    ));
   }
 }

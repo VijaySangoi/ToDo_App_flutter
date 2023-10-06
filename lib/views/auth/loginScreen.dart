@@ -22,7 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response != "false") {
       token = response;
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
     }
   }
 
@@ -41,27 +43,29 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget body(username, password) {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 130),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Helpers.input('Username', username, false),
-            Helpers.input('Password', password, true),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  _login_var = true;
-                  login(username.text, password.text);
-                });
-              },
-              child: const Text('Login'),
-            ),
-            TextButton(
-                onPressed: () {
-                  Helpers.route(context, const RegisterScreen());
-                },
-                child: const Text('Register'))
-          ],
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 130),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Helpers.input('Username', username, false),
+          Helpers.input('Password', password, true),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _login_var = true;
+                login(username.text, password.text);
+              });
+            },
+            child: const Text('Login'),
+          ),
+          TextButton(
+            onPressed: () {
+              Helpers.route(context, const RegisterScreen());
+            },
+            child: const Text('Register'),
+          )
+        ],
+      ),
+    );
   }
 }

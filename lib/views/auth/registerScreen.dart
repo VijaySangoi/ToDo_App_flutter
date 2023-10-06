@@ -29,7 +29,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (response != "false") {
       token = response;
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
     }
   }
 
@@ -50,28 +52,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget body(username, password, email, confirm_password) {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 80),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Helpers.input('Username', username, false),
-            Helpers.input('email', email, false),
-            Helpers.input('Password', password, true),
-            Helpers.input('Confirm Password', confirm_password, true),
-            TextButton(
-              onPressed: () {
-                _login_var = true;
-                register(username.text, password.text, email.text,
-                    confirm_password.text);
-              },
-              child: const Text('Register'),
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Login'))
-          ],
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 80),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Helpers.input('Username', username, false),
+          Helpers.input('email', email, false),
+          Helpers.input('Password', password, true),
+          Helpers.input('Confirm Password', confirm_password, true),
+          TextButton(
+            onPressed: () {
+              _login_var = true;
+              register(username.text, password.text, email.text,
+                  confirm_password.text);
+            },
+            child: const Text('Register'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Login'),
+          )
+        ],
+      ),
+    );
   }
 }
