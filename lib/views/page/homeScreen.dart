@@ -52,6 +52,23 @@ class _HomeState extends State<HomeScreen> {
     }
   }
 
+  create(body) async {
+    var url = "http://" + server + "/api/task/";
+    var head = {
+      "content-type": "application/json",
+      "Authorization": "Bearer " + token
+    };
+    String response = await interface.postrequest(url, head, body);
+    if (response != "false") {
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+      data = json.decode(response);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +127,44 @@ class _HomeState extends State<HomeScreen> {
         replacement: const Center(
           child: CircularProgressIndicator(),
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        // isExtended: true,
+        child: Icon(Icons.add),
+        backgroundColor: Colors.indigoAccent,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              final Task = TextEditingController();
+              return AlertDialog(
+                title: Text('create a new task'),
+                content: SizedBox(
+                  height: 120,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: TextFormField(
+                          controller: Task,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          var body = {
+                            "task": Task.text,
+                          };
+                          create(body);
+                        },
+                        child: const Text('create'),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
