@@ -53,7 +53,7 @@ class _HomeState extends State<HomeScreen> {
   }
 
   create(body) async {
-    var url = "http://" + server + "/api/task/";
+    var url = "http://" + server + "/api/task";
     var head = {
       "content-type": "application/json",
       "Authorization": "Bearer " + token
